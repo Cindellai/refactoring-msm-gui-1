@@ -13,4 +13,7 @@
 #  director_id :integer
 #
 class Movie < ApplicationRecord
+  belongs_to :director
+  # ... other methods of the Movie class
 end
+

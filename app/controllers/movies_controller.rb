@@ -8,7 +8,8 @@ class MoviesController < ApplicationController
   def show
     the_id = params.fetch("path_id")
     @the_movie = Movie.find(the_id)
-
+    @director_name = @the_movie.director.try(:name)  # Handle cases where there might not be a director associated
+  
     render({ :template => "movie_templates/show" })
   end
 

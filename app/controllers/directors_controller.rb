@@ -8,7 +8,8 @@ class DirectorsController < ApplicationController
   def show
     the_id = params.fetch("path_id")
     @the_director = Director.find(the_id)
-
+    @filmography = @the_director.filmography  # Assuming has_many association
+  
     render({ :template => "director_templates/show" })
   end
 

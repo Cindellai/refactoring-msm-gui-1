@@ -115,53 +115,39 @@
     </th>
 
     <th>
-      Director
+      Character name
     </th>
 
     <th>
-      Character name
+      Director (through Movie)
     </th>
 
     <th>
     </th>
   </tr>
 
-  <% a_id = @the_actor.id %>
+  <% @characters = @the_actor.characters.includes(:movie) %>
 
-  <% matching_characters = Character.where({ :actor_id => a_id }) %>
-
-  <% matching_characters.each do |a_character| %>
-    <% m_id = a_character.movie_id %>
-
-    <% matching_movies = Movie.where({ :id => m_id }) %>
-
-    <% the_movie = matching_movies.at(0) %>
-
+  <% @characters.each do |character| %>
     <tr>
       <td>
-        <%= the_movie.title %>
+        <%= character.movie.title %>
       </td>
 
       <td>
-        <%= the_movie.year %>
+        <%= character.movie.year %>
       </td>
 
       <td>
-        <% d_id = the_movie.director_id %>
-        
-        <% matching_directors = Director.where({ :id => d_id }) %>
-        
-        <% the_director = matching_directors.at(0) %>
-
-        <%= the_director.name %>
+        <%= character.name %>
       </td>
 
       <td>
-        <%= a_character.name %>
+        <%= character.movie.director.name %>  # Assuming Movie has a 'director' association
       </td>
 
       <td>
-        <a href="/movies/<%= the_movie.id %>">
+        <a href="/movies/<%= character.movie.id %>">
           Show details
         </a>
       </td>

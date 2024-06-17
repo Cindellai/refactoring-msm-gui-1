@@ -11,4 +11,7 @@
 #  updated_at :datetime         not null
 #
 class Actor < ApplicationRecord
+  has_many :characters  # Defined earlier
+
+    # ... other methods of the Actor class
 end
